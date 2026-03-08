@@ -1,0 +1,9 @@
+version: 1
+name: product-ui-consistency-review-specialized
+description: Review sibling product screens using domain-specific page-family concepts, stable terminology, and specialized flow patterns when a generic consistency review is not enough.
+tags:
+  - product
+  - ux
+  - review
+  - consistency
+  - specialized

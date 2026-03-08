@@ -1,0 +1,9 @@
+version: 1
+name: app-rules-architect
+description: Extract and maintain reusable app product rules, separate universal principles from project-specific behavior, and create or update APP_RULES, APP_RULES_TEMPLATE, PRODUCT_PRINCIPLES, or FEATURE_RULES documents.
+tags:
+  - product
+  - ux
+  - rules
+  - architecture
+  - documentation

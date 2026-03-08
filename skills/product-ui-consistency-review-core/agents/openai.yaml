@@ -1,0 +1,9 @@
+version: 1
+name: product-ui-consistency-review-core
+description: Review sibling product screens, repeated UI blocks, and related flows for semantic, structural, interaction, and visual consistency in a project-agnostic way.
+tags:
+  - product
+  - ux
+  - review
+  - consistency
+  - ui
