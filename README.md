@@ -1,8 +1,8 @@
 # Codex Product Skills
 
-Reusable Codex skills for product review, flow validation, and rule architecture.
+Reusable product-review and product-rules skills for Codex and other AI coding assistants.
 
-This repository helps teams turn vague product feedback into repeatable methods that Codex can reuse across projects.
+This repository helps teams turn vague product feedback into repeatable methods that AI assistants can reuse across projects.
 
 It is built for cases like:
 
@@ -39,7 +39,7 @@ Many product teams repeatedly rediscover the same decisions:
 - whether a user choice actually survives navigation and recovery
 - when a decision should become an app rule instead of another one-off fix
 
-This repo packages those methods into reusable Codex skills, so teams can apply the same product reasoning in multiple apps.
+This repo packages those methods into reusable skills and promptable workflows, so teams can apply the same product reasoning in multiple apps.
 
 ## Skill Map
 
@@ -75,6 +75,8 @@ docs/
 
 ## Installation
 
+### For Codex
+
 Copy one or more skill folders into your Codex skills directory.
 
 Example:
@@ -105,6 +107,104 @@ rsync -a skills/product-flow-validation/ ~/.codex/skills/product-flow-validation
 rsync -a skills/app-rules-architect/ ~/.codex/skills/app-rules-architect/
 ```
 
+### For other AI coding assistants
+
+If your assistant does not support native Codex skills, you can still use this repository as a structured prompting toolkit.
+
+Recommended setup:
+
+1. Clone this repository locally.
+2. Pick the one skill that matches your current job.
+3. Open that skill's `SKILL.md`.
+4. Ask your assistant to read `README.md` first, then the chosen `SKILL.md`.
+5. Tell it to follow the skill as the working method for the rest of the task.
+
+This works well with assistants such as:
+
+- OpenClaw
+- Claude Code
+- Codebuddy
+- other repo-aware coding agents
+
+The key requirement is simple:
+
+The assistant must be able to read local files and follow structured instructions.
+
+## Quick Start For New Users
+
+If you are new to this repository, use this path:
+
+1. Start with `product-ui-consistency-review-core`.
+2. Add `product-flow-validation` once you start fixing state, recovery, or replay issues.
+3. Add `product-ui-consistency-review-specialized` only when your product already has stable family-specific language.
+4. Add `app-rules-architect` when the same review outcomes keep repeating and should become rules.
+
+## Prompt Templates For Other Assistants
+
+If you are using a non-Codex assistant, copy one of these prompts and adjust the file paths.
+
+### Bootstrap prompt
+
+```text
+I want you to use this repository as your working method.
+
+First read:
+1. README.md
+2. the specific SKILL.md I point you to
+
+Then:
+- summarize what that skill is for
+- tell me what inputs you need from my project
+- use that skill as the operating method for the rest of this task
+```
+
+### Generic consistency review prompt
+
+```text
+Read:
+- README.md
+- skills/product-ui-consistency-review-core/SKILL.md
+
+Then use that skill to review these related screens for structural, semantic, interaction, and visual drift.
+Report findings in the format required by the skill.
+```
+
+### Domain-aware review prompt
+
+```text
+Read:
+- README.md
+- skills/product-ui-consistency-review-specialized/SKILL.md
+
+This product already has established page-family language and repeated card roles.
+Use the specialized skill, not the generic one.
+```
+
+### End-to-end flow validation prompt
+
+```text
+Read:
+- README.md
+- skills/product-flow-validation/SKILL.md
+
+Validate this user path end-to-end:
+[replace with your real flow]
+
+Trace the user choice from entry surface through runtime, persistence, recovery, history, and re-entry.
+Tell me where the meaning first diverges.
+```
+
+### Rules extraction prompt
+
+```text
+Read:
+- README.md
+- skills/app-rules-architect/SKILL.md
+
+Use that skill to turn the repeated decisions in this project into a durable app-rules document.
+Separate reusable principles from app-specific rules.
+```
+
 ## Quick Start
 
 ### 1. Review sibling screens
@@ -125,14 +225,20 @@ Use product-flow-validation to validate this path end-to-end: Home recommendatio
 Use app-rules-architect to turn our recent import/apply/save decisions into APP_RULES.md.
 ```
 
-## New User Guidance
+## How To Teach An AI Assistant This Repo Quickly
 
-If you are new to this repository:
+Use this checklist when onboarding a new assistant to the repository:
 
-1. Start with `product-ui-consistency-review-core`.
-2. Add `product-flow-validation` once you start fixing state, recovery, or replay issues.
-3. Add `product-ui-consistency-review-specialized` only when your product already has stable family-specific language.
-4. Add `app-rules-architect` when the same review outcomes keep repeating and should become rules.
+1. Tell it what kind of task you are doing:
+   - sibling-screen review
+   - end-to-end flow validation
+   - rules extraction
+2. Point it to `README.md`.
+3. Point it to exactly one skill first.
+4. Ask it to summarize the skill back to you before doing the work.
+5. Only after that give it the actual project files or repo paths.
+
+This reduces the chance that the assistant mixes multiple methods too early.
 
 ## Design Philosophy
 
